@@ -3,22 +3,35 @@ package main
 import "fmt"
 
 func main() {
-	var items [5]int
-	var a int
-	var search_value int
+	var items [7]int
+
+	var search int
+
+	var value int
+	var frist = 0
+	var last = len(items) - 1
+	var middle = (frist + last) / 2
+	fmt.Println("Enter a Value of Search: ")
+	fmt.Scan(&search)
 	for i := 0; i < len(items); i++ {
-		fmt.Scan(&a)
-		items[i] = a
+		fmt.Scan(&value)
+		items[i] = value
 	}
 
-	fmt.Print("Please Enter a Search Value:")
-	fmt.Scan(&search_value)
-
-	for j := 0; j < len(items); j++ {
-		if items[j] == search_value {
-			fmt.Println("Found The Value at position: ", j)
-			fmt.Println(1)
-
+	for frist <= last {
+		if items[middle] < search {
+			frist = middle + 1
+			middle = (frist + last) / 2
+		} else if items[middle] == search {
+			fmt.Println("Found the position at: ", middle)
+			break
+		} else {
+			last = middle - 1
+			middle = (frist + last) / 2
 		}
+	}
+
+	if frist > last {
+		fmt.Println("Not Found")
 	}
 }
