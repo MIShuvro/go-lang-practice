@@ -3,54 +3,47 @@ package main
 import "fmt"
 
 func main() {
-	var items [6]int
-
-	var max int
-
+	fmt.Println("Bubble Sort")
+	var items [5]int
 	var value int
-
 	for i := 0; i < len(items); i++ {
 		fmt.Scan(&value)
 		items[i] = value
 	}
-
-	for i := 0; i < len(items); i++ {
-		for j := i + 1; j < len(items); j++ {
-
-			if items[i] < items[j] {
-				max = items[j]
-
-			} else if items[i] == items[j] {
-				max = items[j]
-			} else {
-
-				if max < items[i] {
-					max = items[i]
-				} else {
-					max = max
-				}
-
+	for a := 0; a < len(items)-1; a++ {
+		for b := 0; b < len(items)-1; b++ {
+			if items[b] > items[b+1] {
+				var temp int
+				temp = items[b]
+				items[b] = items[b+1]
+				items[b+1] = temp
 			}
-
 		}
 	}
-	shortHand()
-	fmt.Println("max 1", max)
+	fmt.Println(items)
+	var search int
+	fmt.Println("Enter search value:")
+	fmt.Scan(&search)
+	var frist = 0
+	var last = len(items) - 1
+	var middle = (frist + last) / 2
+	for j := 0; j < len(items); j++ {
 
-}
-
-func shortHand() {
-	array := [...]int{
-		1, 2, 4, 44, 5, 66, 11,
-	}
-
-	var max int = array[0]
-
-	for i := 0; i < len(array); i++ {
-		if max < array[i] {
-			max = array[i]
+		if items[middle] < search {
+			frist = middle + 1
+			middle = (frist + last) / 2
+		} else if items[middle] == search {
+			fmt.Print("Position", middle)
+			break
+		} else {
+			last = middle - 1
+			middle = (frist + last) / 2
 		}
+
+	}
+	if frist > last {
+
+		fmt.Println("Not Found")
 	}
 
-	fmt.Println("max 2", max)
 }
